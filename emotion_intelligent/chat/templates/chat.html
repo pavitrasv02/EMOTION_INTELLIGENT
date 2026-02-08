@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Safe Space</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ece5dd;
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .chat-box {
+            background: #fff;
+            width: 400px;
+            height: 600px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: #075e54;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .user {
+            background: #dcf8c6;
+            padding: 10px;
+            margin: 8px;
+            border-radius: 8px;
+            align-self: flex-end;
+            max-width: 80%;
+        }
+
+        .bot {
+            background: #f1f0f0;
+            padding: 10px;
+            margin: 8px;
+            border-radius: 8px;
+            align-self: flex-start;
+            max-width: 80%;
+        }
+
+        form {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+
+        textarea {
+            flex: 1;
+            resize: none;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-left: 8px;
+            padding: 8px 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="chat-box">
+    <div class="header">You’re not alone 🤍</div>
+
+    <div class="messages">
+        {% if user_message %}
+            <div class="user">{{ user_message }}</div>
+        {% endif %}
+
+        {% if response %}
+            <div class="bot">{{ response }}</div>
+        {% endif %}
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        <textarea name="message" rows="2"
+                  placeholder="Type how you’re feeling..."></textarea>
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+</body>
+</html>
